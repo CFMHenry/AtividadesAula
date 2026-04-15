@@ -1,56 +1,64 @@
 #include <stdio.h>
-//ALUNO: Carlos Henrique Ferreira Messias
+
+// ALUNO: Carlos Henrique Ferreira Messias
+
 int main() {
-    int t;
-    scanf("%d", &t);
+    int quantidadeTestes;
+    scanf("%d", &quantidadeTestes);
     
-    while (t--) {
-        int iCont;
-        int jCont;
-        int n;
-        scanf("%d", &n);
+    while (quantidadeTestes--) {
+        int tamanhoArray;
+        scanf("%d", &tamanhoArray);
         
-        int a[n];
-        int freq[n + 1];
+        int array[tamanhoArray];
+        int frequencia[tamanhoArray + 1];
         
-        for (iCont = 1; iCont <= n; iCont++) {
-            freq[iCont] = 0;
+        for (int indice = 1; indice <= tamanhoArray; indice++) {
+            frequencia[indice] = 0;
         }
         
-        int repetido = 0;
+        int existeRepetido = 0;
         
-        for (iCont = 0; iCont < n; iCont++) {
-            scanf("%d", &a[iCont]);
-            freq[a[iCont]]++;
-            if (freq[a[iCont]] > 1) {
-                repetido = 1;
+        // Leitura e contagem de frequência
+        for (int indice = 0; indice < tamanhoArray; indice++) {
+            scanf("%d", &array[indice]);
+            frequencia[array[indice]]++;
+            
+            if (frequencia[array[indice]] > 1) {
+                existeRepetido = 1;
             }
         }
         
-        if (repetido) {
+        // Caso tenha repetidos
+        if (existeRepetido) {
             printf("YES\n");
             continue;
         }
         
-        int vis[n + 1];
-        for (iCont = 1; iCont <= n; iCont++) {
-            vis[iCont] = 0;
+        // Vetor de visitados para contar ciclos
+        int visitado[tamanhoArray + 1];
+        for (int indice = 1; indice <= tamanhoArray; indice++) {
+            visitado[indice] = 0;
         }
         
-        int ciclos = 0;
-        for (int iCont = 1; iCont <= n; iCont++) {
-            if (!vis[iCont]) {
-                ciclos++;
-                jCont = iCont;
-                while (!vis[jCont]) {
-                    vis[jCont] = 1;
-                    jCont = a[jCont - 1];
+        int quantidadeCiclos = 0;
+        
+        // Contagem de ciclos
+        for (int inicio = 1; inicio <= tamanhoArray; inicio++) {
+            if (!visitado[inicio]) {
+                quantidadeCiclos++;
+                
+                int atual = inicio;
+                while (!visitado[atual]) {
+                    visitado[atual] = 1;
+                    atual = array[atual - 1];
                 }
             }
         }
         
-        // (n - ciclos) precisa ser par
-        if ((n - ciclos) % 2 == 0) {
+        int numeroTrocas = tamanhoArray - quantidadeCiclos;
+        
+        if (numeroTrocas % 2 == 0) {
             printf("YES\n");
         } else {
             printf("NO\n");
