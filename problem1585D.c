@@ -27,14 +27,10 @@ int main() {
             }
         }
         
-        // Se tem repetido, sempre YES
         if (repetido) {
             printf("YES\n");
             continue;
         }
-        
-        // Se não tem repetido, é permutação
-        // Preciso contar os ciclos
         
         int vis[n + 1];
         for (iCont = 1; iCont <= n; iCont++) {
