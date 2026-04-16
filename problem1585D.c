@@ -19,7 +19,6 @@ int main() {
         
         int existeRepetido = 0;
         
-        // Leitura e contagem de frequência
         for (int indice = 0; indice < tamanhoArray; indice++) {
             scanf("%d", &array[indice]);
             frequencia[array[indice]]++;
@@ -29,13 +28,11 @@ int main() {
             }
         }
         
-        // Caso tenha repetidos
         if (existeRepetido) {
             printf("YES\n");
             continue;
         }
         
-        // Vetor de visitados para contar ciclos
         int visitado[tamanhoArray + 1];
         for (int indice = 1; indice <= tamanhoArray; indice++) {
             visitado[indice] = 0;
@@ -43,7 +40,6 @@ int main() {
         
         int quantidadeCiclos = 0;
         
-        // Contagem de ciclos
         for (int inicio = 1; inicio <= tamanhoArray; inicio++) {
             if (!visitado[inicio]) {
                 quantidadeCiclos++;
